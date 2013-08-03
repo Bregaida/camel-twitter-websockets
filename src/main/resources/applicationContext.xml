@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:property-placeholder location="classpath:app.properties" />
+
+	<bean id="websocket" class="org.apache.camel.component.websocket.WebsocketComponent">
+		<property name="port" value="${websockets.port}" />
+		<property name="staticResources" value="classpath:." />
+	</bean>
+	
+	<bean id="twitter" class="org.apache.camel.component.twitter.TwitterComponent">
+		<property name="accessToken" value="${twitter.accessToken}" />
+		<property name="accessTokenSecret" value="${twitter.accessTokenSecret}" />
+		<property name="consumerKey" value="${twitter.consumerKey}" />
+		<property name="consumerSecret" value="${twitter.consumerKeySecret}" />	
+	</bean>
+	
+
+	<camelContext xmlns="http://camel.apache.org/schema/spring">
+	
+		<endpoint id="twitterEP" uri="twitter://search?type=polling&amp;delay=2&amp;keywords=${twitter.keywords}"/>
+	
+		<route>
+			<from uri="ref:twitterEP" />
+			<log message="${body}" />
+			<to uri="websocket:camel-tweet?sendToAll=true" />
+		</route>
+	
+	</camelContext>
+
+
+</beans>
+
