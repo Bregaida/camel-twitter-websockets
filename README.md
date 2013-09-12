@@ -1,22 +1,20 @@
-Twitter -> Página WebSockets
+Twitter -> PÃ¡gina WebSockets
 =============================
 
-Este exemplo mostra como mostrar tweets  
+Este exemplo mostra como exibir tweets em uma pÃ¡gina conectada com websockets.
 
-Você precisa configurar:
+VocÃª precisa configurar:
 
-* A máquina EC2
-* Um gtalk próprio para sua máquina (é possível usar o seu próprio, mas não recomendo)
 * O arquivo app.properties (dentro de src/main/resources)
 * Maven 
 
-Você NÃO precisa configurar:
+VocÃª NÃƒO precisa configurar:
 
 * Um application server
-* O arquivo applicationContext.xml (embora você possa, caso exista algo que você queira modificar)
+* O arquivo applicationContext.xml (embora vocÃª possa, caso exista algo que vocÃª queira modificar)
 
 
-Para executar, basta ir até a raiz do projeto e executar mvn exec:java. Quando estiver pronto, o sistema vai mandar uma mensagem para você ;)
+Para executar, basta ir atÃ© a raiz do projeto e executar mvn exec:java. Depois de alguns segundos, basta acessar o endereÃ§o http://localhost:9090/index.html
 
 
-**Este exemplo baseia-se fortemente no descrito pela própria equipe do Apache Camel: http://camel.apache.org/twitter-websocket-example.html**
+**Este exemplo baseia-se fortemente no descrito pela prÃ³pria equipe do Apache Camel: http://camel.apache.org/twitter-websocket-example.html**
